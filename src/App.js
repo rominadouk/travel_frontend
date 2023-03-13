@@ -21,7 +21,7 @@ function App() {
       return `Looks like a beautiful day in ${city}! Pack light and enjoy the sunshine.`;
     }
   }
-
+ 
   return (
     <div>
       <h1>{weatherData.city}, {weatherData.state}</h1>
