@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import './App.css';
 
-function App() {
+const App = () => {
   const [listArray, setListArray] = useState(
     {
       category:"",
@@ -13,13 +13,14 @@ function App() {
       accessories: [""]
     }
   );
-  
+
   const [list, setList] = useState([])
 
   //Get packed items database 
   const allPackingItems = () => {
     axios.get('http://localhost:3000/location').then(response => {
       setListArray(response.data)
+      console.log(response.data)
     });
   };
 
@@ -33,6 +34,9 @@ function App() {
     })
   };
 
+  useEffect(()=> {
+    allPackingItems();
+  },[])
 
   //Update
 
@@ -60,12 +64,22 @@ function App() {
 
   return (
     <div>
-      <h1>{weatherData.city}, {weatherData.state}</h1>
-      <p>Current Temperature: {weatherData.temperature.current}°F</p>
-      <p>High: {weatherData.temperature.high}°F</p>
-      <p>Low: {weatherData.temperature.low}°F</p>
-      <p>Humidity: {weatherData.humidity}%</p>
-      <p>Wind Speed: {weatherData.wind.speed} mph {weatherData.wind.direction}</p>
+      {/* <h1>{weatherData.city}, {weatherData.state}</h1> */}
+      {/* <p>Current Temperature: {weatherData.temperature.current}°F</p> */}
+      {/* <p>High: {weatherData.temperature.high}°F</p> */}
+      {/* <p>Low: {weatherData.temperature.low}°F</p> */}
+      {/* <p>Humidity: {weatherData.humidity}%</p> */}
+      {/* <p>Wind Speed: {weatherData.wind.speed} mph {weatherData.wind.direction}</p> */}
+      <button onClick={allPackingItems}>Get Packing Items</button>
+      <ul>
+      {listArray.map((list) => {
+        return (
+          <div>
+            <li>{list.category}</li>
+          </div>
+        )
+      })}
+      </ul>
     </div>
   );
 }
