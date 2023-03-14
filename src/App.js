@@ -6,11 +6,11 @@ function App() {
   const [listArray, setListArray] = useState(
     {
       category:"",
-      top:"", 
-      bottoms:"",
-      shoes:"",
-      headgear: "",
-      accessories: ""
+      top:[""], 
+      bottoms:[""],
+      shoes:[""],
+      headgear: [""],
+      accessories: [""]
     }
   );
   
