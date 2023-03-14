@@ -3,16 +3,35 @@ import axios from 'axios'
 import './App.css';
 
 function App() {
+  const [listArray, setListArray] = useState(
+    {
+      category:"",
+      top:"", 
+      bottoms:"",
+      shoes:"",
+      headgear: "",
+      accessories: ""
+    }
+  );
+  
+  const [list, setList] = useState([])
 
   //Get packed items database 
   const allPackingItems = () => {
-    axios.get('http://localhost:3000/').then(response => {
-
+    axios.get('http://localhost:3000/location').then(response => {
+      setListArray(response.data)
     });
   };
 
-  //Delete
 
+  //Delete
+  const deleteItem = (listArray) => {
+    axios.delete(`http://localhost:3000/location/${listArray._id}`).then(()=> {
+      axios.get('http://localhost:3000/location').then((response) => {
+        setList(response.data)
+      })
+    })
+  };
 
 
   //Update
