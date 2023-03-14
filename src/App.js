@@ -43,9 +43,10 @@ function App() {
  
 
 const App = () => {
-  const [listArray, setListArray] = useState(
+  //use setlist Dat in handle change
+  const [listData, setListData] = useState(
     {
-      category:"",
+      category:[""],
       top:[""], 
       bottoms:[""],
       shoes:[""],
@@ -54,28 +55,28 @@ const App = () => {
     }
   );
 
-  const [list, setList] = useState([])
+  const [lists, setLists] = useState([])
 
   //Get packed items database 
   const allPackingItems = () => {
     axios.get('http://localhost:3000/location').then(response => {
-      setListArray(response.data)
+      setLists(response.data)
       console.log(response.data)
     });
   };
 
 
   //Delete
-  const deleteItem = (listArray) => {
-    axios.delete(`http://localhost:3000/location/${listArray._id}`).then(()=> {
+  const deleteItem = (lists) => {
+    axios.delete(`http://localhost:3000/location/${lists._id}`).then(()=> {
       axios.get('http://localhost:3000/location').then((response) => {
-        setList(response.data)
+        setLists(response.data)
       })
     })
   };
 
   useEffect(()=> {
-    allPackingItems();
+    allPackingItems()
   },[])
 
   //Update
