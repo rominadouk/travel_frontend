@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import './App.css';
+import Weather from './Weather';
 
 
 function App() {
@@ -40,14 +41,50 @@ function App() {
     }
   }
  
+
+const App = () => {
+  const [listArray, setListArray] = useState(
+    {
+      category:"",
+      top:[""], 
+      bottoms:[""],
+      shoes:[""],
+      headgear: [""],
+      accessories: [""]
+    }
+  );
+
+  const [list, setList] = useState([])
+
+  //Get packed items database 
+  const allPackingItems = () => {
+    axios.get('http://localhost:3000/location').then(response => {
+      setListArray(response.data)
+      console.log(response.data)
+    });
+  };
+
+
+  //Delete
+  const deleteItem = (listArray) => {
+    axios.delete(`http://localhost:3000/location/${listArray._id}`).then(()=> {
+      axios.get('http://localhost:3000/location').then((response) => {
+        setList(response.data)
+      })
+    })
+  };
+
+  useEffect(()=> {
+    allPackingItems();
+  },[])
+
+  //Update
+
+
   return (
     <div>
-      <h1>{weatherData.city}, {weatherData.state}</h1>
-      <p>Current Temperature: {weatherData.temperature.current}°F</p>
-      <p>High: {weatherData.temperature.high}°F</p>
-      <p>Low: {weatherData.temperature.low}°F</p>
-      <p>Humidity: {weatherData.humidity}%</p>
-      <p>Wind Speed: {weatherData.wind.speed} mph {weatherData.wind.direction}</p>
+      <button onClick={allPackingItems}>Get Packing Items</button>
+      <Weather />
     </div>
   );
 }
