@@ -1,7 +1,24 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import './App.css';
 
 function App() {
+
+  //Get packed items database 
+  const allPackingItems = () => {
+    axios.get('http://localhost:3000/').then(response => {
+
+    });
+  };
+
+  //Delete
+
+
+
+  //Update
+
+
+
   function getWeatherMessage(city, temperature, humidity, wind, forecast) {
     if (temperature.current < 50) {
       return `Looks like it's chilly in ${city} today! Don't forget to bring a jacket.`;
