@@ -26,28 +26,22 @@ const PackingList = () => {
 
   return (
     <div>
-      <h1>Packing List</h1>
-return(
-        <div>
-        {lists.map((list) => (
-        <div key={list._id}>
-          <h3>{list.category}</h3>
-          <p>{list.top}</p>
-          <p>{list.bottoms}</p>
-          <p>{list.shoes}</p>
-          <p>{list.headgear}</p>
-          <p>{list.accessories}</p>
-          <button onClick={() => deleteItem(list._id)}>Delete</button>
+    <h2>Packing List</h2>
+      {lists.map((list) => {
+        return (
+          <div>
+            <h3>{list.category}</h3>
+            <p>{list.top}</p>
+            <p>{list.bottoms}</p>
+            <p>{list.shoes}</p>
+            <p>{list.headgear}</p>
+            <p>{list.accessories}</p>
+          </div>
+        )
+      })}
         </div>
-      ))}
-
-        </div>
-
-
-      )
-      
-    </div>
   );
+
 };
 
 export default PackingList;
