@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
+
 
 const PackingList = () => {
   const [lists, setLists] = useState([]);
@@ -27,7 +27,9 @@ const PackingList = () => {
   return (
     <div>
       <h1>Packing List</h1>
-      {lists.map((list) => (
+return(
+        <div>
+        {lists.map((list) => (
         <div key={list._id}>
           <h3>{list.category}</h3>
           <p>{list.top}</p>
@@ -38,6 +40,12 @@ const PackingList = () => {
           <button onClick={() => deleteItem(list._id)}>Delete</button>
         </div>
       ))}
+
+        </div>
+
+
+      )
+      
     </div>
   );
 };
