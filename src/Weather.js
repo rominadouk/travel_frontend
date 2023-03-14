@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+
 const App = () => {
   const [weatherData, setWeatherData] = useState({
     city: '',
@@ -23,7 +24,7 @@ const App = () => {
   const [cityList, setCityList] = useState([
     'New York', 
     'Los Angeles', 
-    'Chicago', 
+    'Palm Springs', 
     'Houston', 
     'Phoenix'
   ]);
@@ -92,7 +93,7 @@ const App = () => {
   return (
     <div className="weather-container">
       <h1>{weatherData.city}, {weatherData.state}</h1>
-      <p>{weatherData.temperature.current}&deg;F</p>
+      <p>{weatherData.temperature.current}°F with {Math.round((weatherData.temperature.current - 32) * 5/9)}°C</p>
       <p>{weatherData.forecast}</p>
       
     <p>Humidity: {weatherData.humidity}%</p>
