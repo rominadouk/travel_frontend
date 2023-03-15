@@ -8,9 +8,10 @@ const Forecast = () => {
   const [forecastData, setForecastData] = useState([]);
 
   useEffect(() => {
+    const weatherAPI = process.env.REACT_APP_WEATHER_API_KEY
     const fetchForecastData = async () => {
       try {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=6add74d6b76b0b938510da6c2c14f624`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${weatherAPI}`);
         setForecastData(response.data.list.slice(0, 3)); // Only show the first 3 days of forecast
       } catch (error) {
         console.log(error);
@@ -29,6 +30,7 @@ const Forecast = () => {
 
   return (
     <div>
+        
       <form onSubmit={handleSearch}>
         <label htmlFor="city">City:</label>
         <input type="text" id="city" />
