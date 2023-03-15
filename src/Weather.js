@@ -30,8 +30,9 @@ const App = () => {
   ]);
 
   useEffect(() => {
+    const weatherAPI = process.env.REACT_APP_WEATHER_API_KEY
     if (cityName) {
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=REACT_APP_WEATHER_API_KEY`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${weatherAPI}`)
         .then(response => {
           const data = response.data;
           setWeatherData({
