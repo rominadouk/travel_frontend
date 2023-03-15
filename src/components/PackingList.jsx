@@ -6,15 +6,15 @@ const PackingList = () => {
   const [lists, setLists] = useState([]);
 
   const allPackingItems = () => {
-    axios.get('http://localhost:3000/location').then(response => {
+    axios.get('https://climate-change.onrender.com/location').then(response => {
       setLists(response.data);
       console.log(response.data);
     });
   };
 
   const deleteItem = (id) => {
-    axios.delete(`http://localhost:3000/location/${id}`).then(()=> {
-      axios.get('http://localhost:3000/location').then((response) => {
+    axios.delete(`https://climate-change.onrender.com/location/${id}`).then(()=> {
+      axios.get('https://climate-change.onrender.com/location').then((response) => {
         setLists(response.data);
       });
     });
