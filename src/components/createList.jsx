@@ -83,7 +83,7 @@ useEffect(()=>{
 
 return(
     <main>
-    <h1>To do's List</h1>
+    <h1>Create List</h1>
     <section>
         <form onSubmit={handleNewListFormComplete}>
             description: <input type="text" onChange={handleNewList}/><br/>
@@ -93,7 +93,7 @@ return(
     </section>
 
     <section>
-    <h2>list</h2>
+    <h2>Your List Items</h2>
     <ul>
         {
             list.map((list)=>{
