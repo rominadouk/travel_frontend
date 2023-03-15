@@ -5,7 +5,6 @@ import Weather from './Weather';
 import PackingList from './components/PackingList';
 
 import Forecast from './Forcast';
-// import WeatherMap from './WeatherMap';
 
 import Update from './components/Update';
 import CreateList from './components/createList';
