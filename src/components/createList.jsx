@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 
 
-const App = () => {
+const CreateList = () => {
 
 const [newDescription, setNewDescription] = useState('');
 const [newComplete, setNewComplete] = useState(false)
@@ -118,4 +117,4 @@ return(
     </main>
     )
 }
-export default App;
+export default CreateList;
