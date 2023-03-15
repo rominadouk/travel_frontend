@@ -3,6 +3,8 @@ import axios from 'axios'
 import './App.css';
 import Weather from './Weather';
 import PackingList from './components/PackingList';
+import Forecast from './Forcast';
+// import WeatherMap from './WeatherMap';
 
 const App = () => {
   const [list, setList] = useState([])
@@ -13,7 +15,10 @@ const App = () => {
     <div>
       
       <Weather />
+      <Forecast />
       <PackingList />
+      
+      
   
     </div>
   );
