@@ -25,8 +25,8 @@ const App = () => {
     'New York', 
     'Los Angeles', 
     'Palm Springs', 
-    'Houston', 
-    'Phoenix'
+    'Cork', 
+    'Salt Lake'
   ]);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const App = () => {
   return (
     <div className="weather-container">
       <h1>{weatherData.city}, {weatherData.state}</h1>
-      <p>{weatherData.temperature.current}°F with {Math.round((weatherData.temperature.current - 32) * 5/9)}°C</p>
+      <p>{weatherData.temperature.current}°F or {Math.round((weatherData.temperature.current - 32) * 5/9)}°C</p>
       <p>{weatherData.forecast}</p>
       
     <p>Humidity: {weatherData.humidity}%</p>
@@ -105,6 +105,10 @@ const App = () => {
           City:
           <input type="text" value={cityName} onChange={handleCityChange} />
         </label>
+        <label>
+  State/Country:
+  <input type="text" value={weatherData.state} onChange={(event) => setWeatherData({...weatherData, state: event.target.value})} />
+</label>
         <button type="submit">Search</button>
       </form>
       <label>
