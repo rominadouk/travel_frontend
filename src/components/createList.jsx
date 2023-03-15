@@ -8,18 +8,30 @@ const CreateList = () => {
 const [newDescription, setNewDescription] = useState('');
 const [newComplete, setNewComplete] = useState(false)
 const [list, setlist] = useState([]);
+const [updateList, setUpdateList] = useState('')
+
 
 const handleNewList = (event) => {
-    // console.log(event.target.value);
     setNewDescription(event.target.value);
     }
 
 const handleNewComplete = (event) => {
-  // console.log(event.target.checked);
     setNewComplete(event.target.checked);
 }
 
+//  ==================== CALL LIST DATA ===============  //
 
+const callListData = () =>{
+    axios
+            .get('http://localhost:3000/list')
+            .then((response)=>{
+                setlist(response.data)
+            })
+}
+// ================== REFRESH PAGE ============= //
+const refreshPage= ()=>{
+    window.location.reload(false)
+}
 // ============= SUBMITING INFO FROM INPUT FIELDS ============= //
 
 const handleNewListFormComplete = (e)=>{
@@ -31,11 +43,7 @@ const handleNewListFormComplete = (e)=>{
             complete:newComplete
         }
     ).then(()=>{
-        axios
-            .get('http://localhost:3000/list')
-            .then((response)=>{
-                setlist(response.data)
-            })
+        callListData()
         })
 }
 
@@ -46,14 +54,10 @@ const handleDelete = (listData) => {
     axios
         .delete(`http://localhost:3000/list/${listData._id}`)
         .then(()=>{
-            axios
-                .get('http://localhost:3000/list')
-                .then((response)=>{
-                    setlist(response.data)
-        })
+            callListData()
     })
 }
-
+// ======================= STRIKE THROUGH ON CLICK OF ITEM ================== //
 const handleToggleComplete = (listData) => {
   // console.log(listData)
     axios
@@ -63,20 +67,30 @@ const handleToggleComplete = (listData) => {
         complete: !listData.complete
         }
     ).then(()=>{
-    axios
-        .get('http://localhost:3000/list')
-        .then((response)=>{
-            setlist(response.data)
-        })
+    callListData()
+    })
+}
+//  ========================== UPDATE LIST ITEM WITH INPUT FIELD ====================== //
+
+const handleNewUpdate = (e) =>{
+    setUpdateList(e.target.value);
+    console.log(e.target.value)
+}
+
+const updateListItem = (listData) => {
+axios
+    .put(`http://localhost:3000/list/${listData._id}`,
+    {
+        description: updateList
+    })
+    .then(()=>{
+        callListData()
+        // refreshPage()
     })
 }
 
 useEffect(()=>{
-    axios
-        .get('http://localhost:3000/list')
-        .then((response)=>{
-            setlist(response.data)
-        })
+    callListData()
 },[])
 
 
@@ -96,7 +110,9 @@ return(
     <ul>
         {
             list.map((list)=>{
-                return <li onClick={(event) => {
+                return (
+                    <li>
+                <span onClick={(event) => {
                     handleToggleComplete(list)
                 }}>
                     {
@@ -108,7 +124,16 @@ return(
                     <button onClick={(event)=> {
                         handleDelete(list)
                     }}>delete</button>
+
+                </span>
+
+                <input type="text" onKeyUp={handleNewUpdate}/><br/>
+                <button onClick={(e)=>{
+                    updateListItem(list)
+                    }}>submit</button>
+
                 </li>
+                )
             })
         }
     </ul>
