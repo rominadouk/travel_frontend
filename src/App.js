@@ -6,6 +6,8 @@ import PackingList from './components/PackingList';
 import Update from './components/Update';
 import CreateList from './components/createList';
 
+console.log(`this is the API key ${process.env.REACT_APP_WEATHER_API_KEY}`)
+
 const App = () => {
   const [list, setList] = useState([])
   const [updated, setUpdated] = useState(true)
