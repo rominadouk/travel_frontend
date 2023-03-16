@@ -108,7 +108,6 @@ const App = () => {
   State/Country:
   <input type="text" value={weatherData.state} onChange={(event) => setWeatherData({...weatherData, state: event.target.value})} />
 </label>
-        <button type="submit">Search</button>
       </form>
       <label>
         Suggested Cities:
