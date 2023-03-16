@@ -99,14 +99,14 @@ return(
     <h1>Create List</h1>
     <section>
         <form onSubmit={handleNewListFormComplete}>
-            description: <input type="text" onChange={handleNewList}/><br/>
-            complete?: <input type= "checkbox" onChange={handleNewComplete}/><br/>
-            <input type="submit" value="create To Do"/>
+            Item: <input type="text" onChange={handleNewList}/><br/>
+            Packed?: <input type= "checkbox" onChange={handleNewComplete}/><br/>
+            <input type="submit" value="Add To Suitcase"/>
         </form>
     </section>
 
     <section>
-    <h2>Your List Items</h2>
+    <h2>Your Packing List </h2>
     <ul>
         {
             list.map((list)=>{
