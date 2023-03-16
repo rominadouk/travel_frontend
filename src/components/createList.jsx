@@ -8,34 +8,42 @@ const CreateList = () => {
 const [newDescription, setNewDescription] = useState('');
 const [newComplete, setNewComplete] = useState(false)
 const [list, setlist] = useState([]);
+const [updateList, setUpdateList] = useState('')
+
 
 const handleNewList = (event) => {
-    // console.log(event.target.value);
     setNewDescription(event.target.value);
     }
 
 const handleNewComplete = (event) => {
-  // console.log(event.target.checked);
     setNewComplete(event.target.checked);
 }
 
+//  ==================== CALL LIST DATA ===============  //
 
+const callListData = () =>{
+    axios
+            .get('https://climate-change.onrender.com/list')
+            .then((response)=>{
+                setlist(response.data)
+            })
+}
+// ================== REFRESH PAGE ============= //
+const refreshPage= ()=>{
+    window.location.reload(false)
+}
 // ============= SUBMITING INFO FROM INPUT FIELDS ============= //
 
 const handleNewListFormComplete = (e)=>{
     e.preventDefault();
     axios.post(
-        'http://localhost:3000/list',
+        'https://climate-change.onrender.com/list',
         {
             description:newDescription,
             complete:newComplete
         }
     ).then(()=>{
-        axios
-            .get('http://localhost:3000/list')
-            .then((response)=>{
-                setlist(response.data)
-            })
+        callListData()
         })
 }
 
@@ -44,39 +52,45 @@ const handleNewListFormComplete = (e)=>{
 const handleDelete = (listData) => {
   // console.log(listData);
     axios
-        .delete(`http://localhost:3000/list/${listData._id}`)
+        .delete(`https://climate-change.onrender.com/list/${listData._id}`)
         .then(()=>{
-            axios
-                .get('http://localhost:3000/list')
-                .then((response)=>{
-                    setlist(response.data)
-        })
+            callListData()
     })
 }
-
+// ======================= STRIKE THROUGH ON CLICK OF ITEM ================== //
 const handleToggleComplete = (listData) => {
   // console.log(listData)
     axios
-        .put(`http://localhost:3000/list/${listData._id}`, 
+        .put(`https://climate-change.onrender.com/list/${listData._id}`, 
         {
         description: listData.description,
         complete: !listData.complete
         }
     ).then(()=>{
-    axios
-        .get('http://localhost:3000/list')
-        .then((response)=>{
-            setlist(response.data)
-        })
+    callListData()
+    })
+}
+//  ========================== UPDATE LIST ITEM WITH INPUT FIELD ====================== //
+
+const handleNewUpdate = (e) =>{
+    setUpdateList(e.target.value);
+    console.log(e.target.value)
+}
+
+const updateListItem = (listData) => {
+axios
+    .put(`https://climate-change.onrender.com/list/${listData._id}`,
+    {
+        description: updateList
+    })
+    .then(()=>{
+        callListData()
+        // refreshPage()
     })
 }
 
 useEffect(()=>{
-    axios
-        .get('http://localhost:3000/list')
-        .then((response)=>{
-            setlist(response.data)
-        })
+    callListData()
 },[])
 
 
@@ -96,7 +110,9 @@ return(
     <ul>
         {
             list.map((list)=>{
-                return <li onClick={(event) => {
+                return (
+                    <li>
+                <span onClick={(event) => {
                     handleToggleComplete(list)
                 }}>
                     {
@@ -108,7 +124,16 @@ return(
                     <button onClick={(event)=> {
                         handleDelete(list)
                     }}>delete</button>
+
+                </span>
+
+                <input type="text" onKeyUp={handleNewUpdate}/><br/>
+                <button onClick={(e)=>{
+                    updateListItem(list)
+                    }}>submit</button>
+
                 </li>
+                )
             })
         }
     </ul>

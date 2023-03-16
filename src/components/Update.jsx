@@ -18,7 +18,7 @@ const Update = ({list, handleUpdate}) => {
      //updating it in the data base
      const postUpdatedList = (e) => {
         e.preventDefault()
-        axios.put(`http://localhost:3000/${list._id}`, editedlist).then(() => {
+        axios.put(`https://climate-change.onrender.com/${list._id}`, editedlist).then(() => {
             handleUpdate()
         })
      }
