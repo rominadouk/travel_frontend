@@ -16,7 +16,11 @@ const App = () => {
   };
 
   return (
-    <div>
+      <div>
+      <div className="title">
+        <h1>CliMate Change</h1>
+        <p>This app uses real-time weather data to provide a three-day forecast for any location, and based on that information, it suggests what clothing and accessories you should pack for your trip. By taking the guesswork out of packing, it helps you be prepared for any weather conditions you may encounter on your journey.</p>
+      </div>
       <Weather />
       <Forecast />
       
