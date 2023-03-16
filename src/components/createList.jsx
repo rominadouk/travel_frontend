@@ -50,7 +50,6 @@ const handleNewListFormComplete = (e)=>{
 // ============== DELETE LIST ITEM ==============//
 
 const handleDelete = (listData) => {
-  // console.log(listData);
     axios
         .delete(`https://climate-change.onrender.com/list/${listData._id}`)
         .then(()=>{
@@ -59,7 +58,6 @@ const handleDelete = (listData) => {
 }
 // ======================= STRIKE THROUGH ON CLICK OF ITEM ================== //
 const handleToggleComplete = (listData) => {
-  // console.log(listData)
     axios
         .put(`https://climate-change.onrender.com/list/${listData._id}`, 
         {
@@ -85,7 +83,6 @@ axios
     })
     .then(()=>{
         callListData()
-        // refreshPage()
     })
 }
 

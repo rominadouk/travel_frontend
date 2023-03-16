@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './App.css';
-import Weather from './Weather';
+import Weather from './components/Weather';
 import PackingList from './components/PackingList';
-import Forecast from './Forcast';
-import Update from './components/Update';
+import Forecast from './components/Forecast';
 import CreateList from './components/createList';
 
 console.log(`this is the API key ${process.env.REACT_APP_WEATHER_API_KEY}`)
